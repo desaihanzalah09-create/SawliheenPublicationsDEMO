@@ -1102,3 +1102,102 @@ body { animation: auroraDrift 24s ease-in-out infinite; }
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
 }
+
+/* ========================================================================
+   Ornate navy & gold artwork — deliberately framed so the design is visible
+   on every screen while copy remains comfortably readable.
+   ======================================================================== */
+body {
+    isolation: isolate;
+    background-color: #071321;
+    background-image:
+        linear-gradient(120deg, rgba(4, 13, 25, .58), rgba(4, 13, 25, .40)),
+        url('images/new-background.jpg') !important;
+    background-size: cover;
+    background-position: center;
+}
+
+body > .top-bar, body > .navbar-header, body > main, body > .footer {
+    position: relative;
+    z-index: 1;
+}
+
+/* Persistent bottom flourishes: these make the supplied pattern feel woven
+   into the page rather than hidden behind dark content panels. */
+body::before, body::after {
+    content: '';
+    position: fixed;
+    bottom: 0;
+    z-index: 0;
+    width: min(30vw, 420px);
+    height: min(34vw, 370px);
+    pointer-events: none;
+    background-image: url('images/new-background.jpg');
+    background-repeat: no-repeat;
+    background-size: 760px auto;
+    filter: saturate(1.13) contrast(1.05);
+    opacity: .72;
+    mask-image: linear-gradient(to top, #000 20%, rgba(0,0,0,.74) 64%, transparent 100%);
+}
+body::before { left: 0; background-position: left bottom; }
+body::after { right: 0; background-position: right bottom; transform: scaleX(-1); }
+
+.hero-section {
+    background: url('images/new-background.jpg') center / cover no-repeat !important;
+    position: relative;
+}
+.hero-overlay {
+    background: linear-gradient(105deg, rgba(5, 14, 29, .68), rgba(5, 14, 29, .38)) !important;
+}
+.hero-content { text-shadow: 0 3px 22px rgba(0, 0, 0, .50); }
+
+.page-header-banner {
+    background: linear-gradient(110deg, rgba(5, 14, 29, .72), rgba(5, 14, 29, .48)), url('images/new-background.jpg') center / cover !important;
+}
+.page-header-banner::after { background-image: none; }
+
+/* Gold pattern peeks from both navbar ends, without interfering with links. */
+.navbar-header { overflow: hidden; background: rgba(8, 21, 42, .87) !important; }
+.navbar-header::before, .navbar-header::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 210px;
+    opacity: .58;
+    pointer-events: none;
+    background-image: linear-gradient(90deg, rgba(8, 21, 42, .08), rgba(8, 21, 42, .38)), url('images/new-background.jpg');
+    background-size: auto 180px;
+    background-repeat: no-repeat;
+    filter: saturate(1.18) contrast(1.06);
+}
+.navbar-header::before { left: 0; background-position: left center; }
+.navbar-header::after { right: 0; background-position: right center; transform: scaleX(-1); }
+.nav-container { position: relative; z-index: 1; }
+
+@media (max-width: 900px) {
+    body {
+        background-attachment: scroll;
+        background-position: center top;
+    }
+    .hero-section { background-position: 53% center !important; }
+    .hero-overlay { background: linear-gradient(110deg, rgba(5, 14, 29, .61), rgba(5, 14, 29, .30)) !important; }
+    .navbar-header::before, .navbar-header::after {
+        width: 104px;
+        opacity: .66;
+        background-size: auto 130px;
+    }
+    body::before, body::after {
+        width: 45vw;
+        height: 47vw;
+        background-size: 540px auto;
+        opacity: .78;
+    }
+    .page-header-banner { background-position: 53% center !important; }
+}
+
+@media (max-width: 480px) {
+    .navbar-header::before, .navbar-header::after { width: 72px; opacity: .72; }
+    body::before, body::after { width: 51vw; height: 54vw; opacity: .82; }
+    .hero-content { text-shadow: 0 2px 14px rgba(0, 0, 0, .55); }
+}
